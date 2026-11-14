@@ -1,0 +1,39 @@
+VIJAY VISUALS — SAFE PATCH NOTES
+
+This is a limited safety patch based on static source review. It does not connect Supabase, configure payment gateways, create DNS records, or deploy the site.
+
+Changes made:
+- Unknown storefront slugs no longer fall back to showing the first business.
+- Storefront lookup uses exact slug/subdomain matches rather than partial-prefix matches.
+- Builder publication is labelled as a local browser preview, not a live public domain.
+- Builder test orders use the correct saved business ID.
+- UPI test orders remain pending; the UI no longer claims payment was verified.
+- Delivery completion only marks COD orders as paid; online payments remain pending until gateway verification.
+- Booking advance-paid amount is zero until an actual payment flow exists.
+- Vite config resolves the project root in an ESM-safe way.
+- package.json and package-lock.json declare the Node.js version required by Vite 8.
+- TypeScript excludes the legacy backup-auth folder; it contains JSX in a .ts file and is not imported by the active application.
+
+Still outstanding:
+- Supabase schema, profile trigger, role model and tenant-level RLS policies.
+- Durable database-backed websites, products, orders, bookings, CRM and subscriptions.
+- Real custom-domain provisioning and public hosting.
+- Payment gateway order creation, verification, webhooks and refunds.
+- Secure AI usage/quota administration and persistent quota storage.
+- Full AI video, photo, audio and Creative Director products.
+
+Validation limitation:
+Dependency installation timed out in this environment. npm run build and TypeScript checks could not be completed. Do not deploy this patch until npm ci and npm run build both pass on Node.js 22.12+ (prefer current Node 22 LTS).
+
+Follow-up preview consistency fix:
+- The builder now opens with the Restaurant template selected, matching the prefilled Royal Feast Cloud Kitchen business details.
+- Restaurant preview catalogue now shows sample biryani, kebab and family-combo items instead of grocery-template features.
+- Other selected templates continue to show their own template feature highlights.
+
+AI Video Studio local renderer update:
+- Added real-time local browser rendering with MediaRecorder and canvas capture.
+- Exports the selected trim range, selected aspect ratio/resolution, optional manual caption overlay, source audio and optional music mix.
+- MP4 is used only when supported by the browser. Otherwise WebM is exported with the correct .webm extension.
+- Source video/audio remain local to the browser session; no server upload was added.
+- Automatic AI captions, beat sync, automatic edit decisions, GPU effects, advanced transitions and guaranteed MP4 transcoding are not implemented.
+- Full Vite build could not be verified because npm registry DNS/network resolution failed in the patch environment. See VIDEO-STUDIO-NOTES.txt for required local validation.

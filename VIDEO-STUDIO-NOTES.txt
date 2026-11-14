@@ -1,0 +1,46 @@
+VIJAY VISUALS — AI VIDEO STUDIO MODULE
+
+Existing workspace features retained:
+- Dedicated AI Video Studio workspace, reachable from the main corporate studio and the builder toolbar.
+- Optional direct route: http://localhost:3000/?portal=video
+- Local video upload and in-browser playback preview.
+- Timeline scrubber and trim in/out settings.
+- 9:16, 16:9 and 1:1 output canvas selection.
+- Manual caption overlay editor.
+- Local audio upload and volume preference.
+- Transition selection and editable scene storyboard.
+- Export preference selection (720p, 1080p, 2K, 4K; MP4/WebM).
+- Downloadable JSON edit-plan file.
+
+New local rendering implementation:
+- Render & Download Video records the selected video from the chosen In point to the Out point.
+- The output canvas applies the selected aspect ratio using a center crop and the selected output dimensions.
+- The manual caption text is burned into the rendered frames when captions are enabled.
+- Source-video audio and the optional music track are mixed through the Web Audio API; the music volume setting is applied.
+- The browser's MediaRecorder encodes the rendered canvas stream and downloads a real video file.
+- MP4 is selected only if the current browser reports MP4 MediaRecorder support. If not, the app falls back to WebM and uses a .webm filename. It never labels WebM bytes as MP4.
+- The renderer works locally in the browser; source media is not uploaded to the server.
+
+Current limitations:
+- Browser codec support varies. Some browsers will export WebM instead of MP4. A guaranteed MP4 transcode would require a separate FFmpeg/WASM or server-side encoding stage.
+- Browser MediaRecorder captures in real time; export duration is approximately the selected clip duration and may be slower under load.
+- Long clips and 2K/4K canvas sizes require substantial memory and CPU/GPU resources. Test shorter clips first; 1080p is the recommended initial setting.
+- Crop is centered; there is no draggable crop/position control yet.
+- Manual captions are rendered as one caption block; automatic speech recognition and timed subtitles are not connected.
+- Beat detection, automatic edits, visual effects, transition rendering, storyboard image generation and AI inference are not connected.
+- The JSON edit plan remains a settings file, not a video file.
+
+Validation:
+- TypeScript/JSX transpilation and a focused TypeScript check of VideoStudio.tsx passed in the patch environment.
+- Full npm ci / Vite production build could not be completed here because the npm registry was unreachable (EAI_AGAIN while resolving registry.npmjs.org).
+- Before deployment, run on Node.js 22.12+:
+    npm.cmd ci
+    npm.cmd run build
+- Then manually test a short local video in Chrome or Edge: upload, set In/Out, select ratio/resolution, optionally add music and captions, render, and play the downloaded file.
+- Verify the actual downloaded extension. MP4 is produced only when MediaRecorder supports the selected MP4 codec; otherwise expect WebM.
+
+2026-11-14 MULTI-CLIP SOURCE-LOADING PATCH
+- Updated the local browser renderer to detach the previous media source before loading each timeline clip.
+- Removed the immediate readyState shortcut that could mistake buffered data from the previous clip for the next clip.
+- Added explicit loadeddata/source verification and load/seek timeouts so failures report the clip name instead of silently skipping/hanging.
+- This is a targeted reliability patch to the existing MediaRecorder + Canvas prototype. It is not a native professional film-rendering engine and has not been browser-tested in this environment.

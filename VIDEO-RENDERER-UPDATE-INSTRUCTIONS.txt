@@ -1,0 +1,22 @@
+VIJAY VISUALS — APPLY THIS UPDATED PROJECT
+
+1. Extract this ZIP into a NEW folder. Keep your old project folder as a backup.
+2. Open PowerShell in the extracted project folder (the folder containing package.json).
+3. Run:
+   npm.cmd ci
+   npm.cmd run build
+4. If the build succeeds, run:
+   npm.cmd run dev
+5. Open http://localhost:3000 and open AI Video Studio.
+6. Upload a short MP4/MOV/WebM clip and wait until the preview and duration appear.
+7. In Auto Edit, set Start (sec) and End (sec).
+8. In Reels & Shorts, select 9:16, 16:9 or 1:1.
+9. Optional: in Captions, enable and type the caption. In Beat Sync, add a local music file and set its volume.
+10. Open Export, choose 720p or 1080p for the first test, then click Render & Download Video.
+11. Check Downloads and play the exported file. The extension will be .mp4 only if the browser supports MP4 recording; otherwise it will be .webm.
+
+Important:
+- Test a short clip first (10–30 seconds). Browser rendering runs in real time.
+- Use 1080p first. 2K/4K may need much more RAM and processing power.
+- Do not overwrite or delete your old project until you have tested this updated copy.
+- This update adds real local trimming/rendering, but it does not add AI speech recognition, beat detection, automatic edits, or advanced visual effects.

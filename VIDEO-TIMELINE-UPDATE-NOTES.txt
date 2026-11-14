@@ -1,0 +1,27 @@
+VIJAY VISUALS AI VIDEO STUDIO — PHASE 02 TIMELINE UPDATE
+
+Added in this update:
+- Add multiple local video files to the timeline.
+- Timeline clips are listed in export order.
+- Reorder added clips with the up/down controls.
+- Set an individual In and Out point for each added clip.
+- Remove added clips from the sequence.
+- Export renders the main clip (using the existing main In/Out settings) followed by each added clip in timeline order.
+- Progress is calculated across the complete sequence.
+- Edit Plan JSON now includes the full clip sequence and each clip's trim points.
+
+Existing main-clip trim, aspect-ratio crop, manual caption overlay, optional music track, resolution selection and browser-supported MP4/WebM recording remain in place.
+
+Current limits:
+- The main source clip remains first; additional clips can be reordered among themselves.
+- No drag-and-drop timeline, multiple video/audio layers, transitions between clips, keyframes, speed ramps, AI speech-to-text, beat detection or automatic AI editing yet.
+- Added clips use their own audio; optional music continues as a single looping track.
+- Export is browser-local via MediaRecorder. Actual MP4 availability depends on the browser. No extension is faked.
+- 2K/4K and long sequences can use substantial RAM and GPU/CPU resources. Test at 720p first.
+
+Install/run on Windows PowerShell from this folder:
+  npm.cmd ci
+  npm.cmd run build
+  npm.cmd run dev
+
+Open the localhost URL shown by the server. Keep the terminal open while using the studio.
